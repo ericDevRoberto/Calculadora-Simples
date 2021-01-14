@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.homeFragment.HomeFragment">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/calculadora_edittext_valor_one"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/fragment_top_margin"
+        android:gravity="center"
+        android:hint="@string/calculadora_edittext_valor_one"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/calculadora_edittext_valor_two"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/calculadora_edittext_valor_two"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/fragment_top_margin"
+        android:gravity="center"
+        android:hint="@string/calculadora_edittext_valor_two"
+        android:inputType="number"
+        app:layout_constraintLeft_toRightOf="@+id/calculadora_edittext_valor_one"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculadora_bnt_sum"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="@string/sum"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calculadora_bnt_minus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculadora_bnt_minus"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="@string/minus"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calculadora_bnt_multiply"
+        app:layout_constraintStart_toEndOf="@+id/calculadora_bnt_sum"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculadora_bnt_multiply"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="@string/multiply"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calculadora_bnt_divide"
+        app:layout_constraintStart_toEndOf="@+id/calculadora_bnt_minus"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculadora_bnt_divide"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="@string/divide"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calculadora_bnt_multiply"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
