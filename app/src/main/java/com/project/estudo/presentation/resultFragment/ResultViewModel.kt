@@ -1,6 +1,5 @@
 package com.project.estudo.presentation.resultFragment
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,34 +15,28 @@ class ResultViewModel(
     val mutablelivedata
         get() = _mutablelivedata
 
+    val allResults = dataBase.getAllResults()
+
     init {
-
-        getLastResult(finalResult)
+        ResultsSuccess(finalResult)
     }
 
-    private fun getLastResult(finalResult: String) {
-        viewModelScope.launch {
-            val lastResult = dataBase.getLastResult()
 
-            if (lastResult.oldResultId != 1L){
-                val oldResult = dataBase.getNextLastResult()
-
-                ResultsSuccess(finalResult, oldResult.oldResultValue)
-            }
-            else
-                ResultsOldResultNull(finalResult)
-        }
-    }
-
-    private fun ResultsSuccess(finalResult: String, oldResult: String) {
-        _mutablelivedata.value = ResultAction.Success(finalResult, oldResult)
+    private fun ResultsSuccess(finalResult: String) {
+        _mutablelivedata.value = ResultAction.Success(finalResult)
     }
 
     private fun ResultsOldResultNull(finalResult: String) {
-        _mutablelivedata.value = ResultAction.OldResultNull(finalResult, "Empty")
+        _mutablelivedata.value = ResultAction.OldResultNull(finalResult)
     }
 
     fun backToHome() {
         _mutablelivedata.value = ResultAction.BackHome
+    }
+
+    fun clearResultData(){
+        viewModelScope.launch {
+            dataBase.clearResults()
+        }
     }
 }

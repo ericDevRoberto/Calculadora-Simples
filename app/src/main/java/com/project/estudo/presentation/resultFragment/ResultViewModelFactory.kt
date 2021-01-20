@@ -1,6 +1,5 @@
 package com.project.estudo.presentation.resultFragment
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.estudo.dataBase.dao.OldResultDao

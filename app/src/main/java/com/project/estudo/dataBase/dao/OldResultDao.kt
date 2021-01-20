@@ -1,5 +1,6 @@
 package com.project.estudo.dataBase.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -16,5 +17,11 @@ interface OldResultDao {
 
     @Query("SELECT * FROM old_result_table ORDER BY oldResultId DESC LIMIT 1, 1")
     suspend fun getNextLastResult() : OldResultTable
+
+    @Query("SELECT * FROM old_result_table ORDER BY oldResultId DESC")
+    fun getAllResults(): LiveData<List<OldResultTable>>
+
+    @Query("DELETE FROM old_result_table")
+    suspend fun clearResults()
 
 }

@@ -12,4 +12,7 @@ class OldResultTable {
 
     @ColumnInfo(name = "oldResultValue")
     var oldResultValue = String()
+
+    @ColumnInfo(name = "oldResultCalculation")
+    var oldResultCalculation = String()
 }

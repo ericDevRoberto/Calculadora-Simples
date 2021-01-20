@@ -1,25 +1,24 @@
 package com.project.estudo.presentation.homeFragment
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.estudo.dataBase.dao.OldResultDao
 import com.project.estudo.domain.model.OldResultTable
 import com.project.estudo.utils.Operators
 import kotlinx.coroutines.launch
 
-class HomeViewModel(val dataBase: OldResultDao, application: Application) :
-    AndroidViewModel(application) {
+class HomeViewModel(val dataBase: OldResultDao) : ViewModel() {
 
     private val _mutableLiveData: MutableLiveData<HomeAction> = MutableLiveData()
     val mutableLiveData
         get() = _mutableLiveData
 
-    private fun putResultInTable(dbData: String) {
+    private fun putResultInTable(dbDataResult: String, dbDataCalculation: String) {
         viewModelScope.launch {
             val db = OldResultTable()
-            db.oldResultValue = dbData
+            db.oldResultValue = dbDataResult
+            db.oldResultCalculation = dbDataCalculation
                 dataBase.insert(db)
         }
     }
@@ -34,7 +33,14 @@ class HomeViewModel(val dataBase: OldResultDao, application: Application) :
                 Operators.MULTIPLY -> (val1.toDouble() * val2.toDouble()).toString()
                 Operators.DIVIDE -> (val1.toDouble() / val2.toDouble()).toString()
             }
-            putResultInTable(result)
+
+            val calculation = when (symbol) {
+                Operators.SUM -> "${val1} + ${val2} = ${result}"
+                Operators.MINUS -> "${val1} - ${val2} = ${result}"
+                Operators.MULTIPLY -> "${val1} x ${val2} = ${result}"
+                Operators.DIVIDE -> "${val1} / ${val2} = ${result}"
+            }
+            putResultInTable(result, calculation)
 
             _mutableLiveData.value = HomeAction.Success(result = result)
         }

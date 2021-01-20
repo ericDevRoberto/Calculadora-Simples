@@ -34,24 +34,36 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             viewModel.backToHome()
         }
 
+        bnt_clear.setOnClickListener {
+            viewModel.clearResultData()
+        }
+
+        val adapter = OldResultAdapter()
+
+        list_old_result.adapter = adapter
+
+        viewModel.allResults.observe(viewLifecycleOwner, {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+
         viewModel.mutablelivedata.observe(viewLifecycleOwner, { action ->
 
             when (action) {
                 is ResultAction.BackHome -> backHome()
-                is ResultAction.Success -> success(action.result, action.oldResult)
-                is ResultAction.OldResultNull -> oldResultNull(action.result, action.oldResult)
+                is ResultAction.Success -> success(action.result)
+                is ResultAction.OldResultNull -> oldResultNull(action.result)
             }
         })
     }
 
-    private fun success(result: String, oldResult: String) {
+    private fun success(result: String) {
         text_dashboard.text = result
-        text_old_result.text = oldResult
     }
 
-    private fun oldResultNull(result: String, oldResult: String) {
+    private fun oldResultNull(result: String) {
         text_dashboard.text = result
-        text_old_result.text = oldResult
     }
 
     private fun backHome() {

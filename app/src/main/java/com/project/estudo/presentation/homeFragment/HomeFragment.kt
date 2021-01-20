@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.project.estudo.R
 import com.project.estudo.dataBase.DataBase
 import com.project.estudo.utils.Operators
+import com.project.estudo.utils.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -24,7 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val dataSource = DataBase.getInstance(application).oldResultDao
 
-        homeViewModelFactory = HomeViewModelFactory(dataSource, application)
+        homeViewModelFactory = HomeViewModelFactory(dataSource)
 
         homeViewModel =
             ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
@@ -54,6 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun toGoResult(operator: Operators) {
+        hideKeyboard()
         homeViewModel.calculator(
             calculadora_edittext_valor_one.text.toString(),
             calculadora_edittext_valor_two.text.toString(),
