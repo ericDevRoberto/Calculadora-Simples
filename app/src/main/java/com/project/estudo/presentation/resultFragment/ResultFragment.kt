@@ -2,6 +2,7 @@ package com.project.estudo.presentation.resultFragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -21,6 +22,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
         val dataSource = DataBase.getInstance(application).oldResultDao
 
+        //ViewModelFactory and ViewModel Declarations
         viewModelFactory =
             ResultViewModelFactory(
                 finalResult = ResultFragmentArgs.fromBundle(requireArguments()).finalResult,
@@ -30,6 +32,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
 
+        //Bottoms
         bnt_back.setOnClickListener {
             viewModel.backToHome()
         }
@@ -38,7 +41,11 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             viewModel.clearResultData()
         }
 
-        val adapter = OldResultAdapter()
+        //RecycleView
+        val adapter = OldResultAdapter(OldResultListener { resultId ->
+            Toast.makeText(context, "$resultId", Toast.LENGTH_SHORT).show()
+            viewModel.goToDetails()
+        })
 
         list_old_result.adapter = adapter
 
@@ -48,12 +55,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             }
         })
 
+        //Actions
         viewModel.mutablelivedata.observe(viewLifecycleOwner, { action ->
 
             when (action) {
                 is ResultAction.BackHome -> backHome()
                 is ResultAction.Success -> success(action.result)
-                is ResultAction.OldResultNull -> oldResultNull(action.result)
+                is ResultAction.GoToDetails -> goToDetailsFragment()
             }
         })
     }
@@ -62,8 +70,9 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         text_dashboard.text = result
     }
 
-    private fun oldResultNull(result: String) {
-        text_dashboard.text = result
+    private fun goToDetailsFragment(){
+        NavHostFragment.findNavController(this)
+            .navigate(ResultFragmentDirections.actionNavigationResultToNavigationDetails())
     }
 
     private fun backHome() {

@@ -26,8 +26,8 @@ class ResultViewModel(
         _mutablelivedata.value = ResultAction.Success(finalResult)
     }
 
-    private fun ResultsOldResultNull(finalResult: String) {
-        _mutablelivedata.value = ResultAction.OldResultNull(finalResult)
+    fun goToDetails(){
+        _mutablelivedata.value = ResultAction.GoToDetails
     }
 
     fun backToHome() {
