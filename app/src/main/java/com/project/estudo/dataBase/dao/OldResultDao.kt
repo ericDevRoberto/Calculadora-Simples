@@ -18,10 +18,12 @@ interface OldResultDao {
     @Query("SELECT * FROM old_result_table ORDER BY oldResultId DESC LIMIT 1, 1")
     suspend fun getNextLastResult() : OldResultTable
 
+    @Query("SELECT * from old_result_table WHERE oldResultId = :key")
+    suspend fun getAResult(key: Long): OldResultTable
+
     @Query("SELECT * FROM old_result_table ORDER BY oldResultId DESC")
     fun getAllResults(): LiveData<List<OldResultTable>>
 
     @Query("DELETE FROM old_result_table")
     suspend fun clearResults()
-
 }

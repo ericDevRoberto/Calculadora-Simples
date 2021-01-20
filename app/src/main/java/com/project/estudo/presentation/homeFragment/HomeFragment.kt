@@ -30,6 +30,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         homeViewModel =
             ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
 
+
+        homeViewModel.mutableLiveData.observe(viewLifecycleOwner, { action ->
+
+            when (action) {
+                is HomeAction.Success -> Success(action.result)
+                is HomeAction.Fail -> Fail()
+            }
+        })
+
+        buttons()
+    }
+
+    private fun buttons(){
         calculadora_bnt_sum.setOnClickListener {
             toGoResult(Operators.SUM)
         }
@@ -45,13 +58,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         calculadora_bnt_divide.setOnClickListener {
             toGoResult(Operators.DIVIDE)
         }
-        homeViewModel.mutableLiveData.observe(viewLifecycleOwner, { action ->
-
-            when (action) {
-                is HomeAction.Success -> Success(action.result)
-                is HomeAction.Fail -> Fail()
-            }
-        })
     }
 
     private fun toGoResult(operator: Operators) {

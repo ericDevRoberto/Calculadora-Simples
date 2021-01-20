@@ -18,6 +18,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Database Dao declaration
         val application = requireNotNull(this.activity).application
 
         val dataSource = DataBase.getInstance(application).oldResultDao
@@ -44,7 +46,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         //RecycleView
         val adapter = OldResultAdapter(OldResultListener { resultId ->
             Toast.makeText(context, "$resultId", Toast.LENGTH_SHORT).show()
-            viewModel.goToDetails()
+            viewModel.goToDetails(resultId)
         })
 
         list_old_result.adapter = adapter
@@ -55,27 +57,35 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             }
         })
 
-        //Actions
-        viewModel.mutablelivedata.observe(viewLifecycleOwner, { action ->
+        //Action
+        viewModel.mutableLiveData.observe(viewLifecycleOwner, { action ->
 
             when (action) {
                 is ResultAction.BackHome -> backHome()
                 is ResultAction.Success -> success(action.result)
-                is ResultAction.GoToDetails -> goToDetailsFragment()
+                is ResultAction.GoToDetails -> goToDetailsFragment(action.finalResult, action.resultId)
             }
         })
     }
 
     private fun success(result: String) {
-        text_dashboard.text = result
+
+        textview_result.text = result
     }
 
-    private fun goToDetailsFragment(){
+    private fun goToDetailsFragment(finalResult: String, resultId: Long) {
+
         NavHostFragment.findNavController(this)
-            .navigate(ResultFragmentDirections.actionNavigationResultToNavigationDetails())
+            .navigate(
+                ResultFragmentDirections.actionNavigationResultToNavigationDetails(
+                    finalResult,
+                    resultId
+                )
+            )
     }
 
     private fun backHome() {
+
         NavHostFragment.findNavController(this)
             .navigate(ResultFragmentDirections.actionNavigationResultToNavigationHome())
     }

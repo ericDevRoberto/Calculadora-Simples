@@ -1,40 +1,41 @@
 package com.project.estudo.presentation.resultFragment
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.estudo.dataBase.dao.OldResultDao
+import com.project.estudo.draft.DraftViewModel
 import kotlinx.coroutines.launch
 
 class ResultViewModel(
     finalResult: String,
     val dataBase: OldResultDao,
-) : ViewModel() {
-
-    private var _mutablelivedata: MutableLiveData<ResultAction> = MutableLiveData()
-    val mutablelivedata
-        get() = _mutablelivedata
+) : DraftViewModel<ResultAction>() {
 
     val allResults = dataBase.getAllResults()
 
+    var result = String()
+
     init {
+        result = finalResult
         ResultsSuccess(finalResult)
     }
 
-
     private fun ResultsSuccess(finalResult: String) {
-        _mutablelivedata.value = ResultAction.Success(finalResult)
+
+        mutableLiveData.value = ResultAction.Success(finalResult)
     }
 
-    fun goToDetails(){
-        _mutablelivedata.value = ResultAction.GoToDetails
+    fun goToDetails(resultId: Long) {
+
+        mutableLiveData.value = ResultAction.GoToDetails(result, resultId)
     }
 
     fun backToHome() {
-        _mutablelivedata.value = ResultAction.BackHome
+
+        mutableLiveData.value = ResultAction.BackHome
     }
 
-    fun clearResultData(){
+    fun clearResultData() {
+
         viewModelScope.launch {
             dataBase.clearResults()
         }

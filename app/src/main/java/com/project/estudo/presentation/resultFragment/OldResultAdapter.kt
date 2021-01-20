@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.estudo.R
 import com.project.estudo.domain.model.OldResultTable
 
-class OldResultAdapter(val clickListener: OldResultListener) :
+class OldResultAdapter(private val clickListener: OldResultListener) :
     ListAdapter<OldResultTable, OldResultAdapter.ViewHolder>(OldResultDiffCallback()) {
 
     class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         companion object {
+
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val view = layoutInflater.inflate(R.layout.list_item_old_result, parent, false)
@@ -24,11 +25,13 @@ class OldResultAdapter(val clickListener: OldResultListener) :
         }
 
         private val textItem: TextView = itemView.findViewById(R.id.item_oldResult)
-        private val item_click: TextView = itemView.findViewById(R.id.item_oldResult)
+        private val itemClick: TextView = itemView.findViewById(R.id.item_oldResult)
 
         fun bind(item: OldResultTable, clickListener: OldResultListener) {
+
             textItem.text = item.oldResultValue
-            item_click.setOnClickListener {
+            itemClick.setOnClickListener {
+
                 clickListener.onClick(item)
             }
         }
@@ -41,6 +44,7 @@ class OldResultAdapter(val clickListener: OldResultListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder.from(parent)
     }
 }

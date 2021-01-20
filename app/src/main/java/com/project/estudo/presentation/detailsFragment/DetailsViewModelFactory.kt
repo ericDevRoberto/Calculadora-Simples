@@ -1,21 +1,23 @@
-package com.project.estudo.presentation.resultFragment
+package com.project.estudo.presentation.detailsFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.estudo.dataBase.dao.OldResultDao
 
-class ResultViewModelFactory(
+class DetailsViewModelFactory(
     private val finalResult: String,
-    private val dataSource: OldResultDao
+    private val dataSource: OldResultDao,
+    private val resultId: Long
 ) :
     ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ResultViewModel::class.java)) {
-            return ResultViewModel(
+        if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+            return DetailsViewModel(
                 finalResult = finalResult,
                 dataBase = dataSource,
+                resultId = resultId
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
