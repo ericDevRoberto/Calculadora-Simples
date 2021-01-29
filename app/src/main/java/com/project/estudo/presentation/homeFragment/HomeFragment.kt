@@ -2,6 +2,7 @@ package com.project.estudo.presentation.homeFragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -40,6 +41,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
 
         buttons()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
+        }
+
+
     }
 
     private fun buttons(){

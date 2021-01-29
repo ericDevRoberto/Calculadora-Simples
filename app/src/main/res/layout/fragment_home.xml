@@ -11,10 +11,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="@dimen/fragment_top_margin"
         android:gravity="center"
         android:hint="@string/calculadora_edittext_valor_one"
         android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/calculadora_bnt_minus"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/calculadora_edittext_valor_two"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,10 +24,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="@dimen/fragment_top_margin"
         android:gravity="center"
         android:hint="@string/calculadora_edittext_valor_two"
         android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/calculadora_bnt_minus"
         app:layout_constraintLeft_toRightOf="@+id/calculadora_edittext_valor_one"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

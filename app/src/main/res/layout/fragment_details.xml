@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="30sp"
-        android:text="Calculation :"
+        android:text="@string/details_calculation"
         android:textColor="@color/black"/>
 
     <androidx.appcompat.widget.AppCompatTextView

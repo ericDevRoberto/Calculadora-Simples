@@ -1,16 +1,25 @@
 <resources>
+
+    <!--App Name-->
     <string name="app_name">estudo</string>
+
+    <!--Home Fragment-->
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="calculadora_edittext_valor_one">Valor 1</string>
     <string name="calculadora_edittext_valor_two">Valor 2</string>
     <string name="sum">+</string>
     <string name="minus">-</string>
     <string name="multiply">X</string>
     <string name="divide">/</string>
+
+    <!--Result Fragment-->
+    <string name="title_dashboard">Result</string>
     <string name="result_bnt_back">back</string>
     <string name="text_result">Result:</string>
     <string name="edit_text_result_old_result">Old Result:</string>
     <string name="bnt_clear">clear</string>
+
+    <!--Details Fragment-->
+    <string name="title_notifications">Details</string>
+    <string name="details_calculation">Calculation :</string>
 </resources>

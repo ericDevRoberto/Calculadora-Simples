@@ -3,54 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigationHome">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigationHome"
         android:name="com.project.estudo.presentation.homeFragment.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_navigation_home_to_navigation_result"
-            app:destination="@id/navigation_result" />
+            app:destination="@id/navigationResult" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_result"
+        android:id="@+id/navigationResult"
         android:name="com.project.estudo.presentation.resultFragment.ResultFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_result" >
+        tools:layout="@layout/fragment_result">
 
         <action
             android:id="@+id/action_navigation_result_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigationHome" />
         <action
             android:id="@+id/action_navigation_result_to_navigation_details"
-            app:destination="@+id/navigation_details"/>
+            app:destination="@+id/navigationDetails" />
 
         <argument
             android:name="finalResult"
-            app:argType="string"/>
+            app:argType="string" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_details"
+        android:id="@+id/navigationDetails"
         android:name="com.project.estudo.presentation.detailsFragment.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_details">
 
         <action
-           android:id="@+id/action_navigation_details_to_navigation_result"
-            app:destination="@+id/navigation_result"/>
+            android:id="@+id/action_navigation_details_to_navigation_result"
+            app:destination="@+id/navigationResult" />
+
+        <action
+            android:id="@+id/action_navigation_details_to_navigation_home"
+            app:destination="@+id/navigationHome" />
 
         <argument
             android:name="finalResult"
-            app:argType="string"/>
+            app:argType="string" />
 
         <argument
             android:name="resultId"
-            app:argType="long"/>
+            app:argType="long" />
     </fragment>
 </navigation>
